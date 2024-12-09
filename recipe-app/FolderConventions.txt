@@ -1,0 +1,14 @@
+Reference for folder structure: https://blog.webdevsimplified.com/2022-07/react-folder-structure/
+
+Q: Where to place hooks?
+A: Page specific hooks: go into the page folder and use the useHookName.tsx format
+   Reusable hooks across pages: go into the hooks folder and use the useHookName.tsx format
+   Context gooks: go into the hooks folder and follow the useHookName.tsx format
+
+Q: What to name page components?
+A: The entry component in each page folder should be named index.tsx
+
+Q: Where to place components?
+A: Page specific components: go into the page folder and use rhe ComponentName.tsx format
+   Reusable components across pages: go into the components folder and use the ComponentName.tsx format
+
