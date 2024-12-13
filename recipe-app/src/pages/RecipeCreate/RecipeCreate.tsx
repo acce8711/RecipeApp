@@ -1,4 +1,4 @@
-import IngredientEdit from "./IngredientEdit"
+import IngredientEdit from "./IngredientEdit/IngredientEdit"
 
 const RecipeCreate = () => {
     return (
