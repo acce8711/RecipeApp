@@ -4,20 +4,42 @@ import { nanoid } from 'nanoid';
 
 const useRecipeCreate = () => {
     const [ingredients, setIngredients] = useState<IngredientType[]>([
-       {id: nanoid(), unitID: 0, measurement: null, ingredientName: null}
+       {id: nanoid(), unitID: "0", measurement: "", ingredientName: ""}
     ])
 
-    const handleIngredientMeasurementChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {value, name, type} = event.target
+    //function to update the ingredient Name
+    const handleIngredientNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value, name} = event.target
 
-        if(type == "number")
-            setIngredients(prevValue => 
-                prevValue.map(i => i.id == name ? {...i, ingredientName: value } : {...i})
-            )
+        setIngredients(prevValue => 
+            prevValue.map(i => i.id == name ? {...i, ingredientName: value } : {...i})
+        )
     } 
-    return{
+
+    //function to update the ingredient measurement 
+    const handleIngredientMeasurementChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value, name} = event.target
+
+        setIngredients(prevValue => 
+            prevValue.map(i => i.id == name ? {...i, measurement: value } : {...i})
+        )
+    } 
+
+    //function to update the ingredient unit
+    const handleIngredientUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value, name} = event.target
+        console.log(value)
+
+        setIngredients(prevValue => 
+            prevValue.map(i => i.id == name ? {...i, unitID: value } : {...i})
+        )
+    } 
+
+    return {
         ingredients, 
-        handleIngredientMeasurementChange
+        handleIngredientNameChange,
+        handleIngredientMeasurementChange,
+        handleIngredientUnitChange
     }
 }
 

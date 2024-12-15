@@ -3,14 +3,13 @@ import { UnitType} from "../utils/types";
 
 //hook returns an array of units
 const useUnits = () => {
-    const [units, setUnits] = useState<string[]>([]);
+    const [units, setUnits] = useState<UnitType[]>([]);
 
     useEffect(() => {
         const getUnits = async() => {
             const response = await fetch("http://localhost:3000/units");
             const result: UnitType[] = await response.json();
-            const result_units: string[] = result.map((x) => (x.unit))
-            setUnits([...result_units]);
+            setUnits([...result]);
         }
 
         getUnits();

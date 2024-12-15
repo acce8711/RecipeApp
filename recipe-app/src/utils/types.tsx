@@ -1,11 +1,11 @@
 export interface UnitType {
-  id: number;
+  id: string;
   unit: string;
 }
 
 export interface IngredientType {
   id: string;
-  unitID: number;
-  measurement: string | null;
-  ingredientName: string | null;
+  unitID: string;
+  measurement: string;
+  ingredientName: string;
 }
