@@ -1,1 +1,1 @@
-//command to run json-server: json-server --watch db.json
+//command to run json-server: json-server --watch units.json
