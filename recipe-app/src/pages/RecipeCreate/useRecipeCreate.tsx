@@ -26,7 +26,7 @@ const useRecipeCreate = () => {
     } 
 
     //function to update the ingredient unit
-    const handleIngredientUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleIngredientUnitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const {value, name} = event.target
         console.log(value)
 

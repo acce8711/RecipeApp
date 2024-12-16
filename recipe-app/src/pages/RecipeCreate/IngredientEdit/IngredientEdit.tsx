@@ -7,7 +7,6 @@ interface Props {
     ingredientNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     ingredientMeasurementChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     ingredientUnitChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    
 }
 
 //Component contains the form elements for adding/editing an ingredient
