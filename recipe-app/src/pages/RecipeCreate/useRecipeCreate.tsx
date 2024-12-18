@@ -12,7 +12,7 @@ const useRecipeCreate = () => {
         const {value, name} = event.target
 
         setIngredients(prevValue => 
-            prevValue.map(i => i.id == name ? {...i, ingredientName: value } : {...i})
+            prevValue.map(i => i.id === name ? {...i, ingredientName: value } : {...i})
         )
     } 
 
@@ -21,7 +21,7 @@ const useRecipeCreate = () => {
         const {value, name} = event.target
 
         setIngredients(prevValue => 
-            prevValue.map(i => i.id == name ? {...i, measurement: value } : {...i})
+            prevValue.map(i => i.id === name ? {...i, measurement: value } : {...i})
         )
     } 
 
@@ -31,17 +31,26 @@ const useRecipeCreate = () => {
         console.log(value)
 
         setIngredients(prevValue => 
-            prevValue.map(i => i.id == name ? {...i, unitID: value } : {...i})
+            prevValue.map(i => i.id === name ? {...i, unitID: value } : {...i})
         )
     } 
 
-    //function to delete the 
+    //function to delete an ingredient
+    const removeIngredient = (id: string) => {
+        setIngredients(prevValue => prevValue.filter(item => item.id !== id))
+    }
+
+    //function to add an ingredient
+    const addIngredient = () => {
+        setIngredients(prevValue => [...prevValue, {id: nanoid(), unitID: "0", measurement: "", ingredientName: ""}])
+    }
 
     return {
         ingredients, 
         handleIngredientNameChange,
         handleIngredientMeasurementChange,
-        handleIngredientUnitChange
+        handleIngredientUnitChange,
+        removeIngredient
     }
 }
 

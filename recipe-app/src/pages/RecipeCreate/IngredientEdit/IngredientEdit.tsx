@@ -7,10 +7,11 @@ interface Props {
     ingredientNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     ingredientMeasurementChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     ingredientUnitChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    removeIngredient: () => void;
 }
 
 //Component contains the form elements for adding/editing an ingredient
-const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange, ingredientUnitChange}: Props) => {
+const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange, ingredientUnitChange, removeIngredient}: Props) => {
     const {units} = useUnits();
     console.log(units)
 
@@ -34,6 +35,7 @@ const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange
                 value={info.ingredientName}
                 onChange={ingredientNameChange}
             />
+            <button onClick={removeIngredient}>Delete</button>
         </div>
     )
 }
