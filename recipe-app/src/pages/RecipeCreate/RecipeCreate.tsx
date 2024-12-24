@@ -6,7 +6,8 @@ const RecipeCreate = () => {
             handleIngredientNameChange, 
             handleIngredientMeasurementChange, 
             handleIngredientUnitChange, 
-            removeIngredient} = useRecipeCreate();
+            removeIngredient,
+            addIngredient} = useRecipeCreate();
 
     const ingredientsUI = ingredients.map(item => <IngredientEdit 
                                                         key={item.id} 
@@ -21,6 +22,7 @@ const RecipeCreate = () => {
             {
                 ingredientsUI
             }
+            <button onClick={addIngredient}>Add</button>
         </>
     )
 }
