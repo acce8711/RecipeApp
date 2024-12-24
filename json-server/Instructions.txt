@@ -1,0 +1,1 @@
+//command to run json-server: json-server --watch units.json
