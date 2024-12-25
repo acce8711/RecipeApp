@@ -51,7 +51,8 @@ const useRecipeCreate = () => {
         handleIngredientMeasurementChange,
         handleIngredientUnitChange,
         removeIngredient,
-        addIngredient
+        addIngredient,
+        setIngredients
     }
 }
 

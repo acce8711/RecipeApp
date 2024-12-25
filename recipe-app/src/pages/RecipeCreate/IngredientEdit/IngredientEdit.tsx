@@ -1,6 +1,8 @@
 import { useState } from "react"
 import useUnits from "../../../hooks/useUnits"
 import { IngredientType } from "../../../utils/types"
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
 
 interface Props {
     info: IngredientType;
@@ -13,11 +15,23 @@ interface Props {
 //Component contains the form elements for adding/editing an ingredient
 const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange, ingredientUnitChange, removeIngredient}: Props) => {
     const {units} = useUnits();
-    console.log(units)
+    
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+      } = useSortable({id: info.id});
+
+      const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+      };
 
     const options: React.ReactElement[] = units.map((x) => (<option value={x.id} key={x.id}>{x.unit}</option>))
     return (
-        <div>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
             <input 
                 type="number" 
                 placeholder="Amount" 
