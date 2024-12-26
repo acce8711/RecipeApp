@@ -1,11 +1,50 @@
 import { useState } from "react"
 import { IngredientType } from "../../utils/types"
 import { nanoid } from 'nanoid';
+import {
+    KeyboardSensor,
+    MouseSensor,
+    useSensor,
+    useSensors,
+    DragOverEvent,
+  } from '@dnd-kit/core';
+import {
+    arrayMove,
+    sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
+
 
 const useRecipeCreate = () => {
     const [ingredients, setIngredients] = useState<IngredientType[]>([
        {id: nanoid(), unitID: "0", measurement: "", ingredientName: ""}
     ])
+
+    //sensors for drag and drop
+    const sensors = useSensors(
+            useSensor(MouseSensor, {
+                // Require the mouse to move by 10 pixels before activating
+                activationConstraint: {
+                  distance: 10,
+                },
+              }),
+            useSensor(KeyboardSensor, {
+                coordinateGetter: sortableKeyboardCoordinates,
+            })
+        )
+    
+    //function to update the ingredient positions after each drag and drop
+    const handleDragEnd = (event: DragOverEvent) => {
+        const {active, over} = event;
+
+        if (active.id !== over?.id) {
+        setIngredients((items) => {
+            const oldIndex = items.findIndex(item => item.id === active.id);
+            const newIndex = items.findIndex(item => item.id === over?.id);
+            
+            return arrayMove(items, oldIndex, newIndex);
+        });
+        }
+    }
 
     //function to update the ingredient Name
     const handleIngredientNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,13 +85,15 @@ const useRecipeCreate = () => {
     }
 
     return {
-        ingredients, 
+        ingredients,
+        sensors,
+        handleDragEnd,
         handleIngredientNameChange,
         handleIngredientMeasurementChange,
         handleIngredientUnitChange,
         removeIngredient,
         addIngredient,
-        setIngredients
+        setIngredients,
     }
 }
 
