@@ -52,6 +52,7 @@ const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange
                 onChange={ingredientNameChange}
             />
             <button onClick={removeIngredient}>Delete</button>
+            
         </div>
     )
 }
