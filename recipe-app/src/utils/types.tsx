@@ -9,3 +9,8 @@ export interface IngredientType {
   measurement: string;
   ingredientName: string;
 }
+
+export interface InstructionType {
+  id: string;
+  instruction: string;
+}

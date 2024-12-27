@@ -1,11 +1,28 @@
 import { useState } from "react"
 import { IngredientType } from "../../utils/types"
 import { nanoid } from 'nanoid';
+import { DragOverEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 
-const useRecipeCreate = () => {
+
+const useIngredientManager = () => {
     const [ingredients, setIngredients] = useState<IngredientType[]>([
        {id: nanoid(), unitID: "0", measurement: "", ingredientName: ""}
     ])
+
+    //function to update the ingredient positions after each drag and drop
+    const handleDragEndIngredient = (event: DragOverEvent) => {
+        const {active, over} = event;
+
+        if (active.id !== over?.id) {
+        setIngredients((items) => {
+            const oldIndex = items.findIndex(item => item.id === active.id);
+            const newIndex = items.findIndex(item => item.id === over?.id);
+            
+            return arrayMove(items, oldIndex, newIndex);
+        });
+        }
+    }
 
     //function to update the ingredient Name
     const handleIngredientNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,13 +63,15 @@ const useRecipeCreate = () => {
     }
 
     return {
-        ingredients, 
+        ingredients,
+        handleDragEndIngredient,
         handleIngredientNameChange,
         handleIngredientMeasurementChange,
         handleIngredientUnitChange,
         removeIngredient,
-        addIngredient
+        addIngredient,
+        setIngredients,
     }
 }
 
-export default useRecipeCreate;
+export default useIngredientManager;

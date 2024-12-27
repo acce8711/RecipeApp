@@ -1,6 +1,7 @@
-import { useState } from "react"
 import useUnits from "../../../hooks/useUnits"
 import { IngredientType } from "../../../utils/types"
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
 
 interface Props {
     info: IngredientType;
@@ -13,11 +14,27 @@ interface Props {
 //Component contains the form elements for adding/editing an ingredient
 const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange, ingredientUnitChange, removeIngredient}: Props) => {
     const {units} = useUnits();
-    console.log(units)
+    
+    //drag and drop
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+      } = useSortable({id: info.id});
 
-    const options: React.ReactElement[] = units.map((x) => (<option value={x.id} key={x.id}>{x.unit}</option>))
+    const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    };
+
+    //creating UI for the available units
+    const options = units.map((x) => (<option value={x.id} key={x.id}>{x.unit}</option>))
+    
     return (
-        <div>
+        <div ref={setNodeRef} style={style}>
+            <div {...attributes} {...listeners}>hold and drag</div>
             <input 
                 type="number" 
                 placeholder="Amount" 
@@ -36,6 +53,7 @@ const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange
                 onChange={ingredientNameChange}
             />
             <button onClick={removeIngredient}>Delete</button>
+            
         </div>
     )
 }
