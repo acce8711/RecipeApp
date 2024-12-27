@@ -33,7 +33,8 @@ const IngredientEdit = ({info, ingredientNameChange, ingredientMeasurementChange
     const options = units.map((x) => (<option value={x.id} key={x.id}>{x.unit}</option>))
     
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <div ref={setNodeRef} style={style}>
+            <div {...attributes} {...listeners}>hold and drag</div>
             <input 
                 type="number" 
                 placeholder="Amount" 

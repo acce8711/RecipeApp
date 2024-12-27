@@ -1,38 +1,28 @@
+import useIngredientManager from "./useIngredientManager"
 import IngredientEdit from "./IngredientEdit/IngredientEdit"
-import useRecipeCreate from "./useIngredientManager"
-
-import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import TextStyle from '@tiptap/extension-text-style'
-import { EditorProvider, useCurrentEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-
-import {
-    DndContext,
-    closestCorners
-  } from '@dnd-kit/core';
-
-  import {
-    SortableContext,
-    verticalListSortingStrategy,
-  } from '@dnd-kit/sortable';
-
-  import {
-    restrictToVerticalAxis,
-    } from '@dnd-kit/modifiers';
+import useInstructionManager from "./useInstructionManager";
+import InstructionEdit from "./InstructionEdit/InstructionEdit";
+import DragAndDrop from "../../shared components/DragAndDrop";
 
 const RecipeCreate = () => {
-    const { editor } = useCurrentEditor()
 
+    //ingredients
     const {ingredients, 
-            sensors,
-            handleDragEnd,
+            handleDragEndIngredient,
             handleIngredientNameChange, 
             handleIngredientMeasurementChange, 
             handleIngredientUnitChange, 
             removeIngredient,
-            addIngredient} = useRecipeCreate();
+            addIngredient} = useIngredientManager();
 
+    //instructions
+    const {instructions,
+            handleDragEndInstruction,
+            handleInstructionChange,
+            removeInstruction,
+            addInstruction} = useInstructionManager();
+
+    //ingredient UI elements
     const ingredientUI = ingredients.map(item => <IngredientEdit 
                                                         key={item.id} 
                                                         info={item} 
@@ -40,31 +30,31 @@ const RecipeCreate = () => {
                                                         ingredientMeasurementChange={handleIngredientMeasurementChange}
                                                         ingredientUnitChange={handleIngredientUnitChange}
                                                         removeIngredient={() => removeIngredient(item.id)}/>)
-    const ingredientKeys = ingredients.map(item => item.id)                                                    
+    const ingredientKeys = ingredients.map(item => item.id)                                
+    
+    //instruction UI elements
+    const instructionUI = instructions.map((item, index) => <InstructionEdit 
+        key={item.id} 
+        info={item} 
+        position={index + 1}
+        instructionChange={handleInstructionChange}
+        removeInstruction={() => removeInstruction(item.id)}/>)
+    const instructionKeys = instructions.map(item => item.id)  
+
     return (
         <>
-        <DndContext modifiers={[restrictToVerticalAxis]} collisionDetection={closestCorners} sensors={sensors} onDragEnd={handleDragEnd}>
-            <SortableContext items={ingredientKeys} strategy={verticalListSortingStrategy}>
-                {ingredientUI}
-            </SortableContext>
-        </DndContext>
+        
             <p>Hi, I am RecipeCreate</p>
+
+            {/* Render Ingredients */}
+            <DragAndDrop itemKeys={ingredientKeys} itemUI={ingredientUI} handleDragEnd={handleDragEndIngredient}/>
             <button onClick={addIngredient}>Add</button>
 
-            <button
-          onClick={() => editor?.chain().focus().toggleBold().run()}
-          disabled={
-            !editor?.can()
-              .chain()
-              .focus()
-              .toggleBold()
-              .run()
-          }
-          className={editor?.isActive('bold') ? 'is-active' : ''}
-        >
-          Bold
-        </button>
+            {/* Render Instructions */}
+            <DragAndDrop itemKeys={instructionKeys} itemUI={instructionUI} handleDragEnd={handleDragEndInstruction}/>
+            <button onClick={addInstruction}>Add</button>
 
+            
         </>
 
         
