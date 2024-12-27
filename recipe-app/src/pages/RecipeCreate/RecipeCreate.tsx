@@ -2,7 +2,11 @@ import useIngredientManager from "./useIngredientManager"
 import IngredientEdit from "./IngredientEdit/IngredientEdit"
 import useInstructionManager from "./useInstructionManager";
 import InstructionEdit from "./InstructionEdit/InstructionEdit";
+import useDurationManager from "./useDurationManager";
 import DragAndDrop from "../../shared components/DragAndDrop";
+import { TextField } from "@mui/material";
+
+import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 
 const RecipeCreate = () => {
 
@@ -21,6 +25,12 @@ const RecipeCreate = () => {
             handleInstructionChange,
             removeInstruction,
             addInstruction} = useInstructionManager();
+
+    //minutes and hours
+    const {minutes, 
+            hours,
+            handleHourChange,
+            handleMinuteChange} = useDurationManager();
 
     //ingredient UI elements
     const ingredientUI = ingredients.map(item => <IngredientEdit 
@@ -53,6 +63,18 @@ const RecipeCreate = () => {
             {/* Render Instructions */}
             <DragAndDrop itemKeys={instructionKeys} itemUI={instructionUI} handleDragEnd={handleDragEndInstruction}/>
             <button onClick={addInstruction}>Add</button>
+
+            {/* Minute input */}
+            <TextField 
+            type="number"
+            value={minutes || ""}
+            onChange={handleMinuteChange}/>
+
+            {/* Hour input */}
+            <TextField 
+            type="number"
+            value={hours || ""}
+            onChange={handleHourChange}/>
 
             
         </>
