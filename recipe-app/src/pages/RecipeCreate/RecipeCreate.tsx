@@ -7,6 +7,7 @@ import useUnits from "../../hooks/useUnits";
 import useIngredientManager from "./useIngredientManager"
 import useInstructionManager from "./useInstructionManager";
 import useDurationManager from "./useDurationManager";
+import useServingsManager from "./useServingsManager";
 
 //Components
 import IngredientEdit from "./IngredientEdit/IngredientEdit"
@@ -47,6 +48,10 @@ const RecipeCreate = () => {
             hours,
             handleHourChange,
             handleMinuteChange} = useDurationManager();
+    
+    //servings
+    const {servings,
+            handleServingsChange} = useServingsManager();
 
     //ingredient UI elements
     const ingredientUI = ingredients.map(item => <IngredientEdit 
@@ -92,6 +97,12 @@ const RecipeCreate = () => {
             type="number"
             value={hours || ""}
             onChange={handleHourChange}/>
+
+            {/* Servings input */}
+            <TextField 
+            type="number"
+            value={servings || ""}
+            onChange={handleServingsChange}/>
 
             {/* Tags input */}
             <Autocomplete
