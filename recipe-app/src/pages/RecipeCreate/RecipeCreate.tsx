@@ -1,18 +1,16 @@
 import useIngredientManager from "./useIngredientManager"
 import IngredientEdit from "./IngredientEdit/IngredientEdit"
+import useUnits from "../../hooks/useUnits";
 import useInstructionManager from "./useInstructionManager";
 import InstructionEdit from "./InstructionEdit/InstructionEdit";
 import useDurationManager from "./useDurationManager";
 import DragAndDrop from "../../shared components/DragAndDrop";
-import { TextField } from "@mui/material";
 
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-
-import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 
 const RecipeCreate = () => {
 
@@ -24,6 +22,9 @@ const RecipeCreate = () => {
             handleIngredientUnitChange, 
             removeIngredient,
             addIngredient} = useIngredientManager();
+
+    //units 
+    const {units} = useUnits();
 
     //instructions
     const {instructions,
@@ -42,6 +43,7 @@ const RecipeCreate = () => {
     const ingredientUI = ingredients.map(item => <IngredientEdit 
                                                         key={item.id} 
                                                         info={item} 
+                                                        units={units}
                                                         ingredientNameChange={handleIngredientNameChange}
                                                         ingredientMeasurementChange={handleIngredientMeasurementChange}
                                                         ingredientUnitChange={handleIngredientUnitChange}
@@ -83,7 +85,7 @@ const RecipeCreate = () => {
             onChange={handleHourChange}/>
 
             {/* Tags input */}
-            <Autocomplete
+            {/* <Autocomplete
                 multiple
                 id="checkboxes-tags-demo"
                 options={top100Films}
@@ -107,7 +109,7 @@ const RecipeCreate = () => {
                 renderInput={(params) => (
                     <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                 )}
-            />
+            /> */}
             
         </>
 

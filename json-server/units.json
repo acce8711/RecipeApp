@@ -24,5 +24,47 @@
             "id": "6",
             "unit": "tablespoon(s)"
         }
+    ],
+    "tags": [
+        {
+            "id": 1,
+            "tagName": "breakfast"
+        },
+        {
+            "id": 2,
+            "tagName": "lunch"
+        },
+        {
+            "id": 3,
+            "tagName": "dinner"
+        },
+        {
+            "id": 4,
+            "tagName": "vegetarian"
+        },
+        {
+            "id": 5,
+            "tagName": "gluten-free"
+        },
+        {
+            "id": 6,
+            "tagName": "vegan"
+        },
+        {
+            "id": 7,
+            "tagName": "low-carb"
+        },
+        {
+            "id": 8,
+            "tagName": "dessert"
+        },
+        {
+            "id": 9,
+            "tagName": "quick"
+        },
+        {
+            "id": 10,
+            "tagName": "healthy"
+        }
     ]
 }
