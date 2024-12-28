@@ -3,6 +3,11 @@ export interface UnitType {
   unit: string;
 }
 
+export interface TagType {
+  id: string;
+  tagName: string;
+}
+
 export interface IngredientType {
   id: string;
   unitID: string;

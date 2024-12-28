@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { UnitType} from "../utils/types";
 
-import { useMemo } from "react";
-
 //hook returns an array of units
 const useUnits = () => {
     const [units, setUnits] = useState<UnitType[]>([]);

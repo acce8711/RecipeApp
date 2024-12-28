@@ -1,11 +1,17 @@
-import useIngredientManager from "./useIngredientManager"
-import IngredientEdit from "./IngredientEdit/IngredientEdit"
-import useUnits from "../../hooks/useUnits";
-import useInstructionManager from "./useInstructionManager";
-import InstructionEdit from "./InstructionEdit/InstructionEdit";
-import useDurationManager from "./useDurationManager";
-import DragAndDrop from "../../shared components/DragAndDrop";
 
+//API imports
+import useTags from "../../hooks/useTags";
+import useUnits from "../../hooks/useUnits";
+
+//Hooks
+import useIngredientManager from "./useIngredientManager"
+import useInstructionManager from "./useInstructionManager";
+import useDurationManager from "./useDurationManager";
+
+//Components
+import IngredientEdit from "./IngredientEdit/IngredientEdit"
+import InstructionEdit from "./InstructionEdit/InstructionEdit";
+import DragAndDrop from "../../shared components/DragAndDrop";
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -25,6 +31,9 @@ const RecipeCreate = () => {
 
     //units 
     const {units} = useUnits();
+
+    //tags 
+    const {tags} = useTags();
 
     //instructions
     const {instructions,
@@ -85,23 +94,21 @@ const RecipeCreate = () => {
             onChange={handleHourChange}/>
 
             {/* Tags input */}
-            {/* <Autocomplete
+            <Autocomplete
                 multiple
                 id="checkboxes-tags-demo"
-                options={top100Films}
+                options={tags}
                 disableCloseOnSelect
-                getOptionLabel={(option) => option.title}
+                getOptionLabel={(option) => option.tagName}
                 renderOption={(props, option, { selected }) => {
                     const { key, ...optionProps } = props;
                     return (
                     <li key={key} {...optionProps}>
                         <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
                         style={{ marginRight: 8 }}
                         checked={selected}
                         />
-                        {option.title}
+                        {option.tagName}
                     </li>
                     );
                 }}
@@ -109,7 +116,7 @@ const RecipeCreate = () => {
                 renderInput={(params) => (
                     <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                 )}
-            /> */}
+            />
             
         </>
 
