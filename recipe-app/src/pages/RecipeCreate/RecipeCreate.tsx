@@ -12,12 +12,14 @@ import useServingsManager from "./useServingsManager";
 //Components
 import IngredientEdit from "./IngredientEdit/IngredientEdit"
 import InstructionEdit from "./InstructionEdit/InstructionEdit";
+import ImageEdit from "./ImageEdit";
 import DragAndDrop from "../../shared components/DragAndDrop";
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+
 
 const RecipeCreate = () => {
 
@@ -128,6 +130,9 @@ const RecipeCreate = () => {
                     <TextField {...params} label="Checkboxes" placeholder="Favorites" />
                 )}
             />
+
+            {/* Image input */}
+            <ImageEdit />
             
         </>
 
