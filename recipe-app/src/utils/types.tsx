@@ -8,6 +8,11 @@ export interface TagType {
   tagName: string;
 }
 
+export interface ImageURLType {
+  id: string;
+  imageURL: string;
+}
+
 export interface IngredientType {
   id: string;
   unitID: string;
