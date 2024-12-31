@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const ImageEdit = () => {
-    const [imgSrc, setImgSrc] = useState<string|null|ArrayBuffer>("");
+    const [imgSrc, setImgSrc] = useState<string>("");
 
     const dragOverHandler = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -12,10 +12,9 @@ const ImageEdit = () => {
     const dropHandler = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
 
+        for()
         const file = event.dataTransfer.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file)
-        setImgSrc(reader.result)
+        setImgSrc(URL.createObjectURL(file))
         console.log(imgSrc)
     }
 
@@ -33,7 +32,7 @@ const ImageEdit = () => {
         >
             Drag Area
         </div>
-        <img src={imgSrc?.toString()}/>
+        <img src={imgSrc} alt="img"/>
         </>
     )
 }
