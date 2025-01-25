@@ -13,8 +13,16 @@ import Menu from '@mui/material/Menu';
 import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import './styles.css'
+import { CardHeader } from '@mui/material';
 
-const RecipeCard = () => {
+export interface RecipeCardArgs {
+    name: string
+    tags: string[]
+    time: string
+}
+
+const RecipeCard = ({name, tags, time}: RecipeCardArgs) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,55 +33,53 @@ const RecipeCard = () => {
     };
 
     return (
-        <Card sx={{minWidth: 300}}>
-            <div className="chipMenu z-10 absolute flex justify-between">
-                <div className="recipeTags">
-                    <Chip label="Recipe tag" color='primary' className='m-1' size='small'/>
-                    <Chip label="Recipe tag" color='primary' className='m-1'size='small'/>
-                    <Chip label="Recipe tag" color='primary' className='m-1' size='small'/>
-                </div>
-                <div className="moreMenu">
-                    <Button
-                        id="basic-button"
-                        variant='outlined'
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
-                        <MoreVertIcon />
-                    </Button>
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
-                        }}
-                    >
-                        <MenuItem onClick={handleClose}>
-                            Delete
-                        </MenuItem>
-                    </Menu>
-                </div>
-            </div>
+        <Card>
+            <CardHeader
+                sx={{height: 40, padding: 1}}
+                action={
+                <IconButton
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+                }
+            >
+                hello
+            </CardHeader>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                'aria-labelledby': 'basic-button',
+                }}
+            >
+                <MenuItem onClick={handleClose}>Delete</MenuItem>
+            </Menu>
            <CardMedia component='img' height = '180' image='https://mui.com/static/images/cards/paella.jpg'/>
            <CardContent>
-                <div className="prose flex justify-between">
-                    <p className='text-xl'>Recipe name</p>
-                    <div className="estimatedTime">
-                        <AccessTimeIcon />
-                        <span className='pl-1'>1 hr</span>
+                <div className="prose flex flex-col">
+                    <div className="text-section flex justify-between w-full">
+                        <p className='text-xl'>
+                            {name}
+                        </p>
+                        <div className="estimatedTime">
+                            <AccessTimeIcon />
+                            <span className='pl-1'>{time}</span>
+                        </div>
+                    </div>
+                    <div className="tags flex pt-4">
+                        {tags.map(tag => 
+                            <Chip label={tag}/>
+                        )}
                     </div>
                 </div>
            </CardContent>
-           <CardActions>
-           <IconButton aria-label="add to favorites">
-            </IconButton>
-            <IconButton aria-label="share">
-            </IconButton>
-        </CardActions>
         </Card>
     )
 }
